@@ -1,2 +1,3 @@
 playwright
-twocaptcha-python
+2captcha-python
+
