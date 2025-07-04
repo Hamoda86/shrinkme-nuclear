@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# تثبيت المتطلبات
 pip install -r requirements.txt
-playwright install
+
+# تثبيت المتصفحات (كروميوم، فايرفوكس، إلخ)
+playwright install chromium
+
+# تشغيل السكربت
 python main.py
+
