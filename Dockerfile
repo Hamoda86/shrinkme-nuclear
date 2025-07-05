@@ -1,17 +1,17 @@
-# استخدم صورة تحتوي على Python + Playwright
-FROM mcr.microsoft.com/playwright/python:v1.53.0
+FROM python:3.12-slim
 
-# إعداد مجلد العمل
+RUN apt-get update && apt-get install -y \
+    wget gnupg curl unzip ca-certificates fonts-liberation \
+    libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2 \
+    libxshmfence1 libgbm1 libxrandr2 libxdamage1 libxcomposite1 \
+    libx11-xcb1 libxinerama1 && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt && playwright install --with-deps
+
+COPY . /app
 WORKDIR /app
 
-# نسخ ملفات المشروع
-COPY . .
-
-# تثبيت المتطلبات
-RUN pip install -r requirements.txt
-
-# نسخ المتصفحات إذا مو موجودة
-RUN playwright install --with-deps
-
-# أمر التشغيل
 CMD ["python", "main.py"]
+
